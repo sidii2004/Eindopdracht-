@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Adminpaneel{% endblock %}
+{% block content %}
+<h1 class="mb-4">Adminpaneel</h1>
+<div class="mb-4"><h2 class="h5">Dvd toevoegen</h2><form class="row g-2" method="post" action="{{ url_for('create_film') }}"><div class="col"><input class="form-control" name="title" placeholder="Filmtitel" required></div><div class="col-auto"><button class="btn btn-primary">Toevoegen</button></div></form></div>
+<div class="mb-4"><h2 class="h5">Dvd's beheren</h2><div class="table-responsive"><table class="table table-bordered"><tr><th>Titel</th><th>Status</th><th></th></tr>{% for film in films %}<tr><td>{{ film.title }}</td><td>{{ film.status }}</td><td><form method="post" action="{{ url_for('delete_film', film_id=film.id) }}"><button class="btn btn-outline-danger btn-sm">Verwijderen</button></form></td></tr>{% endfor %}</table></div></div>
+<div><h2 class="h5">Actielog</h2><div class="table-responsive"><table class="table table-bordered"><tr><th>Tijdstip</th><th>Gebruiker</th><th>Film</th><th>Actie</th></tr>{% for log in logs %}<tr><td>{{ log.timestamp }}</td><td>{{ log.username or 'Onbekend' }}</td><td>{{ log.title }}</td><td>{{ log.action }}</td></tr>{% endfor %}</table></div></div>
+{% endblock %}

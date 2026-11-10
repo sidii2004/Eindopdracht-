@@ -1,4 +1,9 @@
-<!-- voeg hier de extension toe naar base.html -->
-
-<!-- Voeg dan ook de rest van de pagina toe met bootstrap stukken om te zorgen dat er geregistreerd kan worden -->
- 
+{% extends 'base.html' %}
+{% block title %}Registreren{% endblock %}
+{% block content %}
+<div class="row justify-content-center"><div class="col-md-6 col-lg-5">
+<div class="card shadow-sm"><div class="card-body p-4"><h1 class="h3 mb-4">Account registreren</h1>
+<form method="post"><label class="form-label" for="username">Gebruikersnaam</label><input class="form-control mb-3" id="username" name="username" minlength="3" required>
+<label class="form-label" for="password">Wachtwoord</label><input class="form-control mb-3" id="password" name="password" type="password" minlength="8" required>
+<button class="btn btn-primary w-100">Account aanmaken</button></form></div></div></div></div>
+{% endblock %}

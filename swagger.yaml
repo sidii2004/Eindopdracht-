@@ -1,0 +1,108 @@
+openapi: 3.0.3
+info:
+  title: AlfaFlix API
+  version: 1.0.0
+  description: API voor de AlfaFlix videotheek.
+servers:
+  - url: http://localhost:5000
+paths:
+  /api/films:
+    get:
+      summary: Geef alle dvd's
+      responses:
+        '200':
+          description: Lijst met dvd's
+    post:
+      summary: Maak een dvd aan
+      description: Vereist een ingelogde administrator.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilmInput'
+      responses:
+        '201':
+          description: Dvd aangemaakt
+        '401':
+          description: Niet ingelogd
+        '403':
+          description: Geen administrator
+  /api/films/{film_id}:
+    parameters:
+      - $ref: '#/components/parameters/FilmId'
+    get:
+      summary: Geef een dvd
+      responses:
+        '200':
+          description: Dvd
+        '404':
+          description: Niet gevonden
+    put:
+      summary: Wijzig een dvd
+      description: Vereist een ingelogde administrator.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilmInput'
+      responses:
+        '200':
+          description: Dvd gewijzigd
+    delete:
+      summary: Verwijder een dvd
+      description: Vereist een ingelogde administrator.
+      responses:
+        '204':
+          description: Dvd verwijderd
+  /api/films/{film_id}/rent:
+    post:
+      summary: Leen een dvd
+      responses:
+        '200':
+          description: Dvd geleend
+        '409':
+          description: Niet beschikbaar
+  /api/films/{film_id}/reserve:
+    post:
+      summary: Reserveer een dvd
+      responses:
+        '200':
+          description: Dvd gereserveerd
+        '409':
+          description: Niet beschikbaar
+  /api/films/{film_id}/return:
+    post:
+      summary: Breng een dvd terug
+      responses:
+        '200':
+          description: Dvd teruggebracht
+  /api/logging:
+    get:
+      summary: Bekijk de actielog
+      description: Vereist een ingelogde administrator.
+      responses:
+        '200':
+          description: Actielog
+components:
+  parameters:
+    FilmId:
+      name: film_id
+      in: path
+      required: true
+      schema:
+        type: integer
+  schemas:
+    FilmInput:
+      type: object
+      required:
+        - title
+        - status
+      properties:
+        title:
+          type: string
+          example: The Matrix
+        status:
+          type: string
+          enum: [available, rented, reserved]

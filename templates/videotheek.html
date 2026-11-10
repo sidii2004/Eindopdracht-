@@ -1,5 +1,15 @@
-<!-- voeg hier de extension toe naar base.html -->
-
-<!-- Voeg dan ook de rest van de pagina toe met bootstrap stukken om te zorgen dat alle films te bekijken zijn
- maar ook dat je ze kunt reserveren/terugbrengen -->
- 
+{% extends 'base.html' %}
+{% block title %}Videotheek{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4"><div><h1>Onze collectie</h1><p class="text-muted mb-0">Beschikbaar, uitgeleend en gereserveerd.</p></div></div>
+<div class="row">
+{% for film in films %}<div class="col-md-6 col-lg-4 mb-4"><div class="card h-100">
+{% if film.image_url %}<img src="{{ film.image_url }}" class="card-img-top" style="height:220px;object-fit:cover" alt="Afbeelding van {{ film.title }}">{% endif %}
+<div class="card-body"><h2 class="h5">{{ film.title }}</h2><p class="small text-muted">{{ film.description or 'Geen beschrijving beschikbaar.' }}</p>
+{% if film.status == 'available' %}<span class="badge text-bg-success mb-2">Beschikbaar</span>
+<div class="d-flex gap-2"><form method="post" action="{{ url_for('rent_film', film_id=film.id) }}"><button class="btn btn-primary btn-sm">Huren</button></form><form method="post" action="{{ url_for('reserve_film', film_id=film.id) }}"><button class="btn btn-outline-primary btn-sm">Reserveren</button></form></div>
+{% elif film.status == 'rented' %}<span class="badge text-bg-danger mb-2">Uitgeleend</span>{% if film.rented_by and (current_user.role == 'admin') %}<form method="post" action="{{ url_for('return_film', film_id=film.id) }}"><button class="btn btn-warning btn-sm">Terugbrengen</button></form>{% endif %}
+{% else %}<span class="badge text-bg-warning mb-2">Gereserveerd</span>{% endif %}
+</div></div></div>{% else %}<p>Er zijn nog geen dvd's.</p>{% endfor %}
+</div>
+{% endblock %}

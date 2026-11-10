@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
-
-{% block title %}Home{% endblock %}
-
+{% block title %}Welkom bij AlfaFlix{% endblock %}
 {% block content %}
-<div class="jumbotron">
-    <h1 class="display-4">Welcome to Alfaflix!</h1>
+<div class="mb-4">
+    <h1>Welkom bij AlfaFlix</h1>
+    <p>De retro videotheek voor moderne huurders.</p>
+    <a class="btn btn-primary" href="{{ url_for('videotheek') }}">Bekijk de collectie</a>
+</div>
+<div class="row">
+    <div class="col-md-4"><h2 class="h5">Huren</h2><p>Bekijk direct welke dvd's beschikbaar zijn en huur ze online.</p></div>
+    <div class="col-md-4"><h2 class="h5">Reserveren</h2><p>Reserveer een beschikbare dvd voor later.</p></div>
+    <div class="col-md-4"><h2 class="h5">Transparant</h2><p>Alle acties worden veilig gelogd voor medewerkers.</p></div>
 </div>
 {% endblock %}

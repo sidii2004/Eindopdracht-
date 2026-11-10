@@ -1,5 +1,25 @@
 # Assessment DIP
 
+## AlfaFlix eindopdracht
+
+De applicatie bevat de verplichte login-, logging-, CRUD- en API-functionaliteit.
+Daarnaast zijn reserveren, externe filminformatie via Wikipedia en een adminrol
+toegevoegd. De API is gedocumenteerd in [swagger.yaml](./swagger.yaml) en het
+stroomschema staat in [STROOMSCHEMA.md](./STROOMSCHEMA.md).
+
+### Uitgevoerde functionaliteiten
+
+- Registreren, inloggen, uitloggen en toegangsbeveiliging voor de videotheek.
+- DVD's huren, terugbrengen en reserveren met statuscontrole.
+- Logging van actie, gebruiker en timestamp.
+- JSON API voor lezen, aanmaken, wijzigen, verwijderen, huren, reserveren en terugbrengen.
+- Bootstrap template inheritance voor alle pagina's.
+- Externe Wikipedia-API voor filmomschrijvingen en afbeeldingen.
+- Adminpaneel voor DVD's beheren en logs bekijken.
+
+De eerste geregistreerde gebruiker wordt administrator; alle volgende accounts
+krijgen de gebruikersrol.
+
 # Assignments
 
 ## Flask

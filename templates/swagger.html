@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}API-documentatie{% endblock %}
+{% block content %}
+<h1>AlfaFlix API</h1><p>OpenAPI-documentatie voor de JSON API.</p>
+<pre class="bg-dark text-light p-3 rounded"><code>{{ url_for('swagger_yaml', _external=True) }}</code></pre>
+<a class="btn btn-primary" href="{{ url_for('swagger_yaml') }}">Download swagger.yaml</a>
+{% endblock %}
